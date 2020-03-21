@@ -4,13 +4,20 @@ package homework6;
 import java.util.Arrays;
 
 public class Human {
-    public String name;
-    public String surname;
-    public int date_of_birth;
-    public int IQ_level;
-    public Pet6 pet;
-    public Human mother;
-    public Human father;
+    private String name;
+    private String surname;
+    private int date_of_birth;
+    private int IQ_level;
+    private Pet pet;
+    private Schedule humanActivity;
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
 
     public Human(String name, String surname, int date_of_birth){
         this.name=name;
@@ -21,15 +28,11 @@ public class Human {
         this.name=name;
         this.surname=surname;
         this.date_of_birth=date_of_birth;
-        this.father=father;
-        this.mother=mother;
     }
-    public Human(String name, String surname, int date_of_birth, Human father, Human mother, Pet6 pet, int IQ_level){
+    public Human(String name, String surname, int date_of_birth, Human father, Human mother, Pet pet, int IQ_level){
         this.name=name;
         this.surname=surname;
         this.date_of_birth=date_of_birth;
-        this.father=father;
-        this.mother=mother;
         this.IQ_level=IQ_level;
         this.pet = pet;
     }
@@ -48,10 +51,8 @@ public class Human {
 
     @Override
     public String toString(){
-        return String.format("Human{name=%s, surname=%s, year=%d, iq=%d, mother=%s %s, father=%s %s,pet={nickname=%s, age=%d,tricklevel=%d,hapits=%s",
-                name,surname,date_of_birth,IQ_level,mother.name,mother.surname,
-                father.name,father.surname,pet.nickname,pet.age,pet.trickLevel,
-                Arrays.toString(pet.habits));
+        return String.format("Human{name=%s, surname=%s, year=%d",
+                name,surname,date_of_birth);
     }
 
     @Override
@@ -63,4 +64,26 @@ public class Human {
         System.gc();
     }
 
+}
+
+enum Schedule{
+    MONDAY("read book"),
+    TUESDAY("Sleep"),
+    WEDNESDAY("Code..."),
+    THURSDAY("Sleep"),
+    FRIDAY("Walking"),
+    SATURDAY("Resting"),
+    SUNDAY("Nothing");
+
+    private String activity;
+    Schedule(String action) {
+        this.activity =action;
+    }
+
+    public String getActivity() {
+        return activity;
+    }
+    public void setNewActivity(String newActivity){
+        this.activity =newActivity;
+    }
 }

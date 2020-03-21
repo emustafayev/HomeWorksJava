@@ -1,8 +1,6 @@
 package homework8;
 
-import homework6.Pet6;
-
-import java.util.Arrays;
+import homework6.Pet;
 
 public class Human {
     public String name;

@@ -1,13 +1,14 @@
 package homework6;
-import homework4.Pet;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
+
 
 public class HappyFamily {
     private Human mother;
     private Human father;
     private Human[] children;
-    private Pet6 pet;
+    private Pet pet;
     public static int count;
 
     public HappyFamily(Human mother, Human father){
@@ -16,7 +17,7 @@ public class HappyFamily {
         this.father=father;
         this.children=children;
     }
-    public HappyFamily(Human mother, Human father, Pet6 pet){
+    public HappyFamily(Human mother, Human father, Pet pet){
         Human[] children = new Human[] {};
         this.mother=mother;
         this.father=father;
@@ -25,9 +26,10 @@ public class HappyFamily {
     }
     public HappyFamily(){}
 
-    public void countFamily(){
+    public int countFamily(){
         HappyFamily.count=2;//to parents
         HappyFamily.count+=this.children.length;
+        return HappyFamily.count;
     }
 
     public void setMother(Human mother){
@@ -40,7 +42,7 @@ public class HappyFamily {
         this.children =children;
         this.countFamily();
     }
-    public void setPet(Pet6 pet){
+    public void setPet(Pet pet){
         this.pet=pet;
     }
     public Human getMother(){
@@ -52,28 +54,44 @@ public class HappyFamily {
     public Human[] getChildren(){
         return this.children;
     }
-    public Pet6 getPet(){
+    public Pet getPet(){
         return this.pet;
     }
 
-    public void addChildren(Human[] children){
+    public Human[] addChildren(Human[] children){
         this.children=children;
         this.countFamily();
+        return this.children;
+    }
+    public boolean deleteChild(int index){
+        boolean removed=false;
+        if(index<children.length){
+            Human[] result = new Human[children.length-1];
+            removed = remove(this.children,index,result);
+            this.countFamily();
+        }
+        return removed;
     }
 
-    public boolean deleteChild(int index){
-        boolean removed;
-        Human[] result = new Human[children.length-1];
-        removed = remove(this.children,index,result);
-        this.countFamily();
+    public boolean deleteChild(Human human){
+        boolean removed=false;
+        int length = Arrays.stream(children).filter(h -> h.equals(human)).toArray().length;
+        if(length<children.length){
+            Human[] result= new Human[children.length-length];
+            Arrays.stream(children).filter(h -> !h.equals(human)).collect(Collectors.toList()).toArray(result);
+            removed=true;
+            this.countFamily();
+            this.children=result;
+        }
         return removed;
     }
     public boolean addChild(Human child){
-        Human[] result = new Human[0];
+        Human[] result;
         try {
            result = Arrays.copyOf(this.children,this.children.length+1);
            this.children[this.children.length-1] = child;
             this.children=result;
+            this.countFamily();
             return true;
         }catch (Exception e){
             return false;
@@ -94,9 +112,12 @@ public class HappyFamily {
 
     @Override
     public String toString(){
-        return String.format("Family{father=%s %s,mother=%s %s,children=%s,pet=%s,}",this.father.name, this.father.surname,this.mother.name, this.mother.surname, Arrays.toString(this.children),this.pet.nickname);
+        return String.format("Family{father=%s %s,mother=%s %s,children=%s,pet=%s,}",
+                this.father.getName(), this.father.getSurname(),this.mother.getName(),
+                this.mother.getSurname(), Arrays.toString(this.children),
+                this.pet.nickname);
     }
-                  
+
     @Override
     public boolean equals(Object o){
         if(this==o) return true;

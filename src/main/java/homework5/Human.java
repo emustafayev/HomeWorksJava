@@ -1,6 +1,7 @@
 package homework5;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Human {
     public String name;
@@ -17,22 +18,15 @@ public class Human {
         this.date_of_birth=date_of_birth;
     }
     public Human(String name, String surname, int date_of_birth, Human father, Human mother){
-        this.name=name;
-        this.surname=surname;
-        this.date_of_birth=date_of_birth;
+        this(name, surname, date_of_birth);
         this.father=father;
         this.mother=mother;
     }
     public Human(String name, String surname, int date_of_birth, Human father, Human mother, Pet pet, int IQ_level){
-        this.name=name;
-        this.surname=surname;
-        this.date_of_birth=date_of_birth;
-        this.father=father;
-        this.mother=mother;
+        this(name, surname, date_of_birth, father, mother);
         this.IQ_level=IQ_level;
         this.pet = pet;
     }
-    public Human(){}//Cant refactor HUman class according to homework5, because homework4 not checked yet.
 
     public void greetPet(){
         System.out.printf("Hello, %s",this.pet.nickname);
@@ -46,11 +40,28 @@ public class Human {
     }
 
     @Override
+    public int hashCode(){
+        return Objects.hash(name, surname,date_of_birth,IQ_level,pet,mother,father);
+    }
+
+    @Override
     public String toString(){
         return String.format("Human{name=%s, surname=%s, year=%d, iq=%d, mother=%s %s, father=%s %s,pet={nickname=%s, age=%d,tricklevel=%d,hapits=%s",
                 name,surname,date_of_birth,IQ_level,mother.name,mother.surname,
                 father.name,father.surname,pet.nickname,pet.age,pet.trickLevel,
                 Arrays.toString(pet.habits));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Human human = (Human) o;
+        return date_of_birth == human.date_of_birth &&
+                name.equals(human.name) &&
+                surname.equals(human.surname) &&
+                mother.equals(human.mother) &&
+                father.equals(human.father);
     }
 
     @Override
@@ -61,5 +72,4 @@ public class Human {
     public static void main(String[] args) {
         System.gc();
     }
-
 }

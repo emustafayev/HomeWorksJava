@@ -1,19 +1,27 @@
-package homework5;
+package homework6;
 
 import java.util.Arrays;
 
+enum Species{
+    CAT,
+    DOG,
+    BIRD,
+    FISH
+}
+
+
 public class Pet {
-    public String species;
+    public Species species;
     public String nickname;
     public int age;
     public int trickLevel;
     public String[] habits = new String[5];
 
-    public Pet(String species,String nickname ){
+    public Pet(Species species, String nickname ){
         this.species = species;
         this.nickname = nickname;
     }
-    public Pet(String species, String nickname, int age, int trickLevel,String[] habits){
+    public Pet(Species species, String nickname, int age, int trickLevel, String[] habits){
         this.nickname = nickname;
         this.species = species;
         this.age=age;
@@ -37,4 +45,8 @@ public class Pet {
     public String toString(){
         return String.format("pet={nickname=%s, age=%d,tricklevel=%d,hapits=%s",this.nickname,this.age,this.trickLevel, Arrays.toString(this.habits));
     }
+    public void finalize(){
+        System.out.println("Object removed from memory!");
+    }
+
 }
