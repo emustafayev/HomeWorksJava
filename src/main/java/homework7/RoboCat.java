@@ -3,8 +3,8 @@ package homework7;
 public class RoboCat extends Pet {
 
     public Species species;
-    public RoboCat(Species spc,String nickname, int age, int trickLevel, String[] habits){
-        super(nickname,age,trickLevel,habits);
+    public RoboCat(Species spc,String nickname, int age, int trickLevel){
+        super(nickname,age,trickLevel);
         this.species=spc;
 
     }

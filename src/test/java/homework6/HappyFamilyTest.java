@@ -70,7 +70,7 @@ class HappyFamilyTest {
 
     @Test
     void addChildTest() {
-        assertEquals(true,family.addChild(child3));
+        assertTrue(family.addChild(child3));
     }
 
     @Test

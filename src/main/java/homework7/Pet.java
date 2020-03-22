@@ -1,6 +1,5 @@
 package homework7;
 
-
 import java.util.Arrays;
 
 public abstract class Pet {
@@ -9,14 +8,11 @@ public abstract class Pet {
     public int trickLevel;
     public String[] habits = new String[5];
 
-    public Pet(String nickname ){
-        this.nickname = nickname;
-    }
-    public Pet(String nickname, int age, int trickLevel, String[] habits){
+
+    public Pet(String nickname, int age, int trickLevel){
         this.nickname = nickname;
         this.age=age;
         this.trickLevel=trickLevel;
-        this.habits=habits;
     }
 
     public void eat(){

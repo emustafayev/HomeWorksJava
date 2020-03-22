@@ -1,20 +1,22 @@
 package homework7;
 
+
 enum Species{
     CAT,DOG,ROBOCAT,UNKNOWN
 }
 
 public class Main {
     public static void main(String[] args) {
+        Dog dog = new Dog(Species.CAT,"Doggy",3,23);
+        RoboCat roboCat = new RoboCat(Species.ROBOCAT,"Robo",3,34);
+        roboCat.eat();
+        dog.foul();
+        Woman mother = new Woman("Mommy",null,dog,40);
+        Man father = new Man("Daddy",null,roboCat,60);
+        Family family = new Family(mother,father);
+        Human child = mother.bornChild(family);
 
-        RoboCat robo = new RoboCat(Species.ROBOCAT,"Robby",10,50,new String[]{"stupid,hardworking"});
-        System.out.println(robo.nickname);
-        System.out.println(robo.species);
-        System.out.println(robo.toString());
-        robo.response();
-
-        Man man = new Man("Name",Species.CAT);
-        man.greetPet();
-
+        System.out.println(child.family.getFather().name);
+        System.out.println(child.getIQ());
     }
 }

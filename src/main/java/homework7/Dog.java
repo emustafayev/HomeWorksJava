@@ -1,13 +1,14 @@
 package homework7;
 
-public class Dog extends Pet {
+public class Dog extends Pet implements Foul {
 
     public Species species;
-    public Dog(Species spc,String nickname, int age, int trickLevel, String[] habits){
-        super(nickname,age,trickLevel,habits);
+    public Dog(Species spc,String nickname, int age, int trickLevel){
+        super(nickname,age,trickLevel);
         this.species=spc;
-
     }
+
+    @Override
     public void foul(){
         System.out.println("I need to cover it up!");
     }
