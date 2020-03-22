@@ -9,18 +9,19 @@ public class Pet {
     public String nickname;
     public int age;
     public int trickLevel;
-    public Set<String> habits = new HashSet<String>();
+    public Set<String> habits = new HashSet<>();
     Species species;
 
-    public Pet(String nickname ){
-        this.nickname = nickname;
-    }
-    public Pet(String nickname, int age, int trickLevel, String[] habits, Species spc){
+
+    public Pet(String nickname, int age, int trickLevel, Species spc){
         this.nickname = nickname;
         this.age=age;
         this.trickLevel=trickLevel;
-        this.habits.addAll(Arrays.asList(habits));
         this.species=spc;
+    }
+
+    public void setHabits(String habits) {
+        this.habits.add(habits);
     }
 
     public void eat(){

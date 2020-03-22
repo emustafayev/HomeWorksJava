@@ -24,7 +24,6 @@ public class HappyFamily {
         this.children=children;
         this.pet = pet;
     }
-    public HappyFamily(){}
 
     public int countFamily(){
         HappyFamily.count=2;//to parents
@@ -122,7 +121,7 @@ public class HappyFamily {
     public boolean equals(Object o){
         if(this==o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        HappyFamily family = new HappyFamily();
+        HappyFamily family = (HappyFamily)o;
         return Arrays.equals(this.pet.habits,family.pet.habits);
     }
     @Override

@@ -1,9 +1,13 @@
 package homework7;
 
+import java.util.HashSet;
+import java.util.Set;
 
 enum Species{
     CAT,DOG,ROBOCAT,UNKNOWN
 }
+
+
 
 public class Main {
     public static void main(String[] args) {
@@ -18,5 +22,6 @@ public class Main {
 
         System.out.println(child.family.getFather().name);
         System.out.println(child.getIQ());
+        Set<Pet> set= new HashSet<>();
     }
 }
