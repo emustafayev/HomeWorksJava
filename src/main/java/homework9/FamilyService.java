@@ -66,8 +66,8 @@ public class FamilyService {
                 .collect(Collectors.toList()))).collect(Collectors.toList()).get(0);
     }
 
-    public Set<Pet> getPets(int index){
-        return db.getFamilyByIndex(index).getPet();
+    public Set<Pet> getPets(int familyIndex){
+        return db.getFamilyByIndex(familyIndex).getPet();
     }
 
     public void addPet(int index, Pet pet){

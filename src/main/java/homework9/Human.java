@@ -3,6 +3,7 @@ package homework9;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Human {
     public String name;
@@ -46,6 +47,21 @@ public class Human {
 
     public String getSurname() {
         return this.surname;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Human human = (Human) o;
+        return date_of_birth == human.date_of_birth &&
+                IQ_level == human.IQ_level &&
+                Objects.equals(surname, human.surname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(surname, date_of_birth, IQ_level);
     }
 }
 
