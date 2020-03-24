@@ -1,4 +1,4 @@
-package homework8;
+package homework9;
 
 public enum Schedules {
     MONDAY,

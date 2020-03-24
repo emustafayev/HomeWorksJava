@@ -3,6 +3,7 @@ package homework7;
 public class Dog extends Pet implements Foul {
 
     public Species species;
+
     public Dog(Species spc,String nickname, int age, int trickLevel){
         super(nickname,age,trickLevel);
         this.species=spc;

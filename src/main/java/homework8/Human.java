@@ -1,51 +1,48 @@
 package homework8;
 
-
-import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class Human {
-    public String name;
-    public String surname;
-    public int date_of_birth;
-    public int IQ_level;
-    public HashMap<Schedules,String> activity;
+    public String[] names = new String[]{"John","Alex","Steve"};
+    String name;
+    Family family;
+    private int IQ;
+    private Map<Schedules,String> schedulesMap;
 
 
-    public Human(String name, String surname, int date_of_birth, int iq){
-        this.name=name;
-        this.surname=surname;
-        this.date_of_birth=date_of_birth;
-        this.IQ_level = iq;
+    public Human(String n, Family family_ref, int iq){
+        this.name=n;
+        this.family = family_ref;
+        this.IQ=iq;
     }
 
-    public Human(String name, String surname, int date_of_birth,int IQ_level, Pet pet, HashMap<Schedules,String> activities){
-        this(name, surname, date_of_birth,IQ_level);
-        this.activity=activities;
+    public void greetPet(){}
+
+    public Human(String n, Family family_ref, int iq,Map<Schedules,String> schedulesMap ){
+        this(n,family_ref,iq);
+        this.schedulesMap = schedulesMap;
     }
 
+    public int getIQ() {
+        return IQ;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @Override
-    public String toString(){
-        return String.format("Human{name=%s, surname=%s, year=%d, iq=%d",
-                name,surname,date_of_birth,IQ_level);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Human human = (Human) o;
+        return IQ == human.IQ &&
+                family.equals(human.family);
     }
 
     @Override
-    public void finalize(){
-        System.out.println("Object removed from memory!");
-    }
-
-    public static void main(String[] args) {
-        System.gc();
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public String getSurname() {
-        return this.surname;
+    public int hashCode() {
+        return Objects.hash(family, IQ);
     }
 }
-
-

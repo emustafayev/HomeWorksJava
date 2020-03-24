@@ -69,6 +69,11 @@ class HappyFamilyTest {
     }
 
     @Test
+    void deleteChildWithIndexTest(){
+        assertTrue(family.deleteChild(1));
+    }
+
+    @Test
     void addChildTest() {
         assertTrue(family.addChild(child3));
     }

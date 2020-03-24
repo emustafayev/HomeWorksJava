@@ -14,12 +14,10 @@ public class Family {
     public static int count;
 
     public Family(Human mother, Human father){
-        Human[] children = new Human[]{};
+        this.children = new Human[]{};
         this.mother=mother;
         this.father=father;
-        this.children=children;
     }
-    public Family(){}
 
     public void countFamily(){
         Family.count=2;//two parents
@@ -59,10 +57,15 @@ public class Family {
 
     public boolean deleteChild(Human human){
         boolean removed=false;
-        int length = Arrays.stream(children).filter(h -> h.equals(human)).toArray().length;
-        if(length<children.length){
-            Human[] result= new Human[children.length-length];
-            Arrays.stream(children).filter(h -> !h.equals(human)).collect(Collectors.toList()).toArray(result);
+        Human[] newArr = new Human[this.children.length-1];
+        int index=0;
+        for (Human child : this.children) {
+            if (!child.equals(human)) {
+                newArr[index++] = child;
+            }
+        }
+        this.children=newArr;
+        if(index<children.length-1){
             removed=true;
         }
         return removed;
@@ -91,14 +94,9 @@ public class Family {
     public boolean equals(Object o){
         if(this==o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
-        Family family = new Family();
+        Family family = (Family)o;
         return this.mother.name.equals(family.mother.name)
                 && this.father.name.equals(family.mother.name);
-    }
-
-    @Override
-    public void finalize(){
-        System.out.println("Object removed from memory!");
     }
 
     @Override

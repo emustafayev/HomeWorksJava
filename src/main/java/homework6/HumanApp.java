@@ -27,10 +27,9 @@ public class HumanApp {
         System.out.println(family);
 
 
-
-//        for (long i = 0; i < 10000000000L; i++) {
-//            new Family();
-//        }
+        for (long i = 0; i < 10000000000L; i++) {
+            new HappyFamily(mother,father);
+        }
 
 
     }
