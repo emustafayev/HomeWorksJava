@@ -1,4 +1,4 @@
-package homework10;
+package homework12;
 
 
 import java.text.ParseException;
@@ -17,11 +17,11 @@ public class Human {
     private long birthDate;
 
 
-    public Human(String name, String surname , int iq,long birthDate) throws ParseException {
+    public Human(String name, String surname , int iq,long birthDate){
         this.name=name;
         this.surname=surname;
         this.IQ_level = iq;
-        this.birthDate=dateToMillis(birthDate);
+        this.birthDate=birthDate;
     }
     public Human(String name, String surname,String date_of_birth, int iq) throws ParseException {
         this.name=name;
@@ -29,13 +29,6 @@ public class Human {
         this.IQ_level = iq;
         this.birthDate=parseDate(date_of_birth);
     }
-    private long dateToMillis(long rawDate) throws ParseException {
-        String pattern = "yyyy";
-        SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
-        Date date = dateFormat.parse(String.valueOf(rawDate));
-        return date.getTime();
-    }
-
     private long parseDate(String rawDate) throws ParseException {
         String pattern = "dd/MM/yyyy";
         SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
@@ -43,15 +36,17 @@ public class Human {
         return date.getTime();
     }
 
-    public Human(String name, String surname, int IQ_level,long birthDate, HashMap<Schedules,String> activities) throws ParseException {
+    public Human(String name, String surname, int IQ_level,long birthDate, HashMap<Schedules,String> activities){
         this(name, surname, IQ_level,birthDate);
         this.activity=activities;
     }
 
 
     int getYear(){
-        LocalDate localBirth = Instant.ofEpochMilli(birthDate).atZone(ZoneId.systemDefault()).toLocalDate();
-        return localBirth.getYear();
+        Date date = new Date(this.birthDate);
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        return calendar.get(Calendar.YEAR);
     }
 
     private String dateFormatter(long millis){
@@ -93,7 +88,8 @@ public class Human {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Human human = (Human) o;
-        return IQ_level == human.IQ_level &&
+        return birthDate == human.birthDate &&
+                IQ_level == human.IQ_level &&
                 Objects.equals(surname, human.surname);
     }
 

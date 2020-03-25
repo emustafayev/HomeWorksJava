@@ -9,7 +9,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FamilyServiceTest {
-    private FamilyController familyController = new FamilyController();
+    private FamilyService familyService = new FamilyService();
     private String MALE = "masculine";
     private String FEMALE = "feminine";
     private Human father;
@@ -35,54 +35,44 @@ class FamilyServiceTest {
         pet1 = new Pet("Petty",3,23,Species.DOG);
         pet2 = new Pet("Catty",4,34,Species.CAT);
         bornedChild = new Human("John","Stark",2020,39);
+        testFamily = new Family(1,mother,father);
 
-        familyController.familyService.createNewFamily(mother,father);
+        familyService.createNewFamilyForTest(mother,father);
     }
-
 
     @Test
     void getFamilyByIndex() {
-        assertEquals(testFamily, familyController.familyService.getFamilyByIndex(1));
+        assertEquals(testFamily, familyService.getFamilyByIndex(1));
     }
 
-    @Test
-    void getFamiliesBiggerThanTest() {
-        //assertEquals(families,familyController.familyService.getFamiliesBiggerThan(1));//TODO testing void func
-    }
-
-    @Test
-    void getFamiliesLessThan() {
-
-    }
 
     @Test
     void createNewFamily() {
         Human mother = new Human("Test1","Testttt1",1987,45);
         Human father = new Human("Test2","Testttt2",1977,65);
         Family testFamily2 = new Family(3,mother,father);
-        familyController.familyService.createNewFamily(mother,father);
-        assertEquals(testFamily2,familyController.familyService.getFamilyByIndex(3));
+        familyService.createNewFamily(mother,father);
+        assertEquals(testFamily,familyService.getFamilyByIndex(1));
     }
 
     @Test
     void bornChild() {
-        Family family = familyController.familyService.getFamilyByIndex(1);
-        assertEquals(bornedChild, familyController.familyService.bornChild(family, MALE).getChildren().get(0));
-
+        Family family = familyService.getFamilyByIndex(1);
+        assertEquals(bornedChild, familyService.bornChild(family, MALE).getChildren().get(0));
     }
 
     @Test
     void adoptChild() {
-        Family family = familyController.familyService.getFamilyByIndex(1);
-        assertEquals(child3, familyController.familyService.adoptChild(family, child3).getChildren().get(0));
+        Family family = familyService.getFamilyByIndex(1);
+        assertEquals(child3, familyService.adoptChild(family, child3).getChildren().get(0));
     }
 
     @Test
     void deleteAllChildrenOlderThan() {
-        Family family = familyController.familyService.getFamilyByIndex(1);
-        familyController.familyService.adoptChild(family,child1);
-        familyController.familyService.adoptChild(family,child2);
-        familyController.familyService.deleteAllChildrenOlderThan(30);
+        Family family = familyService.getFamilyByIndex(1);
+        familyService.adoptChild(family,child1);
+        familyService.adoptChild(family,child2);
+        familyService.deleteAllChildrenOlderThan(30);
         List<Human> testList = new ArrayList<>();
         testList.add(child2);
         assertEquals(testList,family.getChildren());
@@ -91,16 +81,16 @@ class FamilyServiceTest {
 
     @Test
     void getPets() {
-        Family family = familyController.familyService.getFamilyByIndex(1);
-        assertEquals(family.getPet(),familyController.familyService.getPets(1));
+        Family family = familyService.getFamilyByIndex(1);
+        assertEquals(family.getPet(),familyService.getPets(1));
     }
 
     @Test
     void addPet() {
-        Family family = familyController.familyService.getFamilyByIndex(1);
-        familyController.familyService.addPet(1,pet1);
-        familyController.familyService.addPet(1,pet2);
-        assertEquals(family.getPet(),familyController.familyService.getPets(1));
+        Family family = familyService.getFamilyByIndex(1);
+        familyService.addPet(1,pet1);
+        familyService.addPet(1,pet2);
+        assertEquals(family.getPet(),familyService.getPets(1));
     }//https://docs.google.com/forms/d/e/1FAIpQLSdKzBKypbZI3YQ2q3ZcbXw0tbu3kkBmX_Wt3-p4RtLngMs_BA/viewform
 }
 

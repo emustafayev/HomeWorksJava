@@ -41,6 +41,10 @@ public class FamilyService {
         db.saveFamily(new Family(mother,father));
     }
 
+    public void createNewFamilyForTest(Human mother, Human father){
+        db.saveFamily(new Family(1,mother,father));
+    }
+
     public Family bornChild(Family family, String gender){
         family.getChildren().add(new Human(
                 gender.equals("masculine")?boyNames[new Random().nextInt(boyNames.length)]: girlNames[new Random().nextInt(girlNames.length)],

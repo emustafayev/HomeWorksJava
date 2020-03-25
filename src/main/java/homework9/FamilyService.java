@@ -37,6 +37,9 @@ public class FamilyService {
         }
     }
 
+    public void createNewFamilyForTest(Human mother, Human father){
+        db.saveFamily(new Family(1,mother,father));
+    }
     public void createNewFamily(Human mother, Human father){
         db.saveFamily(new Family(mother,father));
     }
