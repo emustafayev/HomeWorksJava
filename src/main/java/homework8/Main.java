@@ -19,5 +19,6 @@ public class Main {
         System.out.println(child.family.getFather().name);
         System.out.println(child.getIQ());
         Set<Pet> set= new HashSet<>();
+
     }
 }

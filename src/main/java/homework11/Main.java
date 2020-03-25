@@ -32,5 +32,8 @@ public class Main {
 //        System.out.println(familyController.familyService.getPets(1).toString());
         familyController.familyService.displayAllFamilies();
 
+        String st = "hello";
+        System.out.printf("%15s",st);
+
     }
 }

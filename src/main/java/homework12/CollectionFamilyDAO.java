@@ -40,12 +40,13 @@ public class CollectionFamilyDAO implements FamilyDAO {
     }
     @Override
     public void saveFamily(Family newFamily) {
-        if(data.stream().filter(f -> f.getIndex() == newFamily.getIndex()).count() == 0){
+        if(data.stream().noneMatch(f ->
+                f.getIndex() == newFamily.getIndex())){
             data.add(newFamily);
         }else{
             Family originFamily = data.stream().filter(f -> f.getIndex() == newFamily.getIndex()).collect(Collectors.toList()).get(0);
             originFamily.setChildren(newFamily.getChildren());
-            originFamily.setPet(newFamily.getPet());
+            originFamily.setPets(newFamily.getPets());
             originFamily.countFamily();
         }
     }

@@ -1,5 +1,6 @@
 package homework12;
 
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.Random;
 import java.util.Set;
@@ -13,7 +14,7 @@ public class FamilyService {
 
     public void displayAllFamilies(){
         db.getAllFamilies().forEach(family ->
-                console.print(family.toString()));
+                console.print(family.prettyFormat()));
     }
 
     public Family getFamilyByIndex(int index){
@@ -26,14 +27,14 @@ public class FamilyService {
                 family.countFamily()>count)
                 .collect(Collectors.toList())
                 .forEach(f ->
-                        console.print(f.toString()));
+                        console.print(f.prettyFormat()));
     }
 
     public void getFamiliesLessThan(int count){
         for(Family family:db.getData().stream().filter(family ->
-                family.countFamily()<count)
+                family.countFamily()<=count)
                 .collect(Collectors.toList())){
-            console.print(family.toString());
+            console.print(family.prettyFormat());
         }
     }
 
@@ -41,12 +42,20 @@ public class FamilyService {
         db.saveFamily(new Family(mother,father));
     }
 
-    public Family bornChild(Family family, String gender){
+    public void createNewFamilyForTest(Human mother, Human father){
+        db.saveFamily(new Family(1,mother,father));
+    }
+
+    public Family bornChild(Family family, String gender,String name)  {
         family.getChildren().add(new Human(
-                gender.equals("masculine")?boyNames[new Random().nextInt(boyNames.length)]: girlNames[new Random().nextInt(girlNames.length)],
+                name,
                 family.getFather().surname,
-                (family.getFather().IQ_level+family.getMother().IQ_level)/2,1372339860L));
+                (family.getFather().IQ_level+family.getMother().IQ_level)/2,LocalDate.now().getYear(),gender.equals("masculine")?"boy":"girl"));
         return family;
+    }
+
+    public boolean deleteFamilyByIndex(int index){
+        return db.deleteFamily(index);
     }
 
     public Family adoptChild(Family family, Human child){
@@ -55,21 +64,25 @@ public class FamilyService {
     }
 
 
-    public Family deleteAllChildrenOlderThan(int childAge){
+    public boolean deleteAllChildrenOlderThan(int childAge){
         int dateOfBorn = LocalDate.now().getYear()-childAge;
-        return db.getData().stream()
+        return !db.getData().stream()
                 .peek(family -> family.setChildren(family.getChildren()
-                .stream()
-                .filter(child ->
-                        child.getYear() > dateOfBorn)
-                .collect(Collectors.toList()))).collect(Collectors.toList()).get(0);
+                        .stream()
+                        .filter(child ->
+                                child.getYear() > dateOfBorn)
+                        .collect(Collectors.toList()))).collect(Collectors.toList()).isEmpty();
+    }
+
+    public int numberOfFamiliesAccToMemeberCount(int countOfMembers){
+        return (int) this.db.getData().stream().filter(family -> family.countFamily() == countOfMembers).count();
     }
 
     public Set<Pet> getPets(int familyIndex){
-        return db.getFamilyByIndex(familyIndex).getPet();
+        return db.getFamilyByIndex(familyIndex).getPets();
     }
 
     public void addPet(int index, Pet pet){
-        db.getFamilyByIndex(index).getPet().add(pet);
+        db.getFamilyByIndex(index).getPets().add(pet);
     }
 }

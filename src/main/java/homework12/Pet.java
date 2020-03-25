@@ -12,6 +12,7 @@ public class Pet {
     Species species;
 
 
+
     public Pet(String nickname, int age, int trickLevel, Species spc){
         this.nickname = nickname;
         this.age=age;
@@ -28,6 +29,15 @@ public class Pet {
     }
 
 
+    public String prettyFormat(){
+        return String.format("{species=%s,nickname=%s,age=%d,trickLevel = %d,habits=%s}",
+                this.species.toString(),
+                this.nickname,
+                this.age,
+                this.trickLevel,
+                this.habits.toString()
+        );
+    }
 
     @Override
     public String toString(){

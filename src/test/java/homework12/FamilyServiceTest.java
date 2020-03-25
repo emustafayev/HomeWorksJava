@@ -1,6 +1,10 @@
-package homework11;
+package homework12;
 
-
+import homework9.Family;
+import homework9.FamilyService;
+import homework9.Human;
+import homework9.Pet;
+import homework9.Species;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -46,10 +50,6 @@ class FamilyServiceTest {
         assertEquals(testFamily, familyService.getFamilyByIndex(1));
     }
 
-    @Test
-    void getFamiliesLessThan() {
-
-    }
 
     @Test
     void createNewFamily() {
@@ -59,7 +59,6 @@ class FamilyServiceTest {
         familyService.createNewFamily(mother,father);
         assertEquals(testFamily,familyService.getFamilyByIndex(1));
     }
-
 
     @Test
     void bornChild() {
@@ -82,6 +81,7 @@ class FamilyServiceTest {
         List<Human> testList = new ArrayList<>();
         testList.add(child2);
         assertEquals(testList,family.getChildren());
+
     }
 
     @Test

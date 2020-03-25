@@ -13,7 +13,7 @@ public class Family {
     private Human mother;
     private Human father;
     private List<Human> children;
-    private Set<Pet> pet = new HashSet<>();
+    private Set<Pet> pets = new HashSet<>();
     private int countOfFamily;
 
 
@@ -52,7 +52,7 @@ public class Family {
         this.countFamily();
     }
     public void addPet(Pet pet){
-        this.pet.add(pet);
+        this.pets.add(pet);
     }
     public Human getMother(){
         return this.mother;
@@ -61,8 +61,8 @@ public class Family {
         return this.father;
     }
 
-    public void setPet(Set<Pet> pet) {
-        this.pet = pet;
+    public void setPets(Set<Pet> pets) {
+        this.pets = pets;
     }
 
     public int getIndex() {
@@ -72,8 +72,8 @@ public class Family {
         return this.children;
     }
 
-    public Set<Pet> getPet() {
-        return pet;
+    public Set<Pet> getPets() {
+        return pets;
     }
 
     public List<Human> addChildren(List<Human> children){
@@ -107,9 +107,25 @@ public class Family {
         return String.format("Family{ID=%d,father=%s %s,mother=%s %s,children=%s,pet=%s,count of family=%d}",this.index,
                 this.father.getName(), this.father.getSurname(),this.mother.getName(),
                 this.mother.getSurname(), this.children.toString(),
-                this.pet.toString(),
+                this.pets.toString(),
                 this.countOfFamily);
     }
+
+
+    public String prettyFormat(){
+        StringBuffer sb = new StringBuffer();
+        this.children.forEach(human -> sb.append(String.format("%s:%s\n                     ",human.getGender(),human.prettyFormat())));
+        sb.append("\n            pets:");
+        sb.append("[");
+        this.pets.forEach(pet -> sb.append(pet.prettyFormat()));
+        sb.append("]");
+
+
+        return String.format("Family:\n        mother:{%s},\n        father:{%s},\n            " +
+                "children:\n                     %s",this.mother.prettyFormat(),this.father.prettyFormat(),sb.toString());
+
+    }
+
 
     @Override
     public boolean equals(Object o){
