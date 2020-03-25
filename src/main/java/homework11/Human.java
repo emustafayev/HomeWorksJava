@@ -37,10 +37,6 @@ public class Human {
         System.out.println("Object removed from memory!");
     }
 
-    public static void main(String[] args) {
-        System.gc();
-    }
-
     public String getName() {
         return this.name;
     }

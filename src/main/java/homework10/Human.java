@@ -3,7 +3,10 @@ package homework10;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.*;
 
 public class Human {
@@ -54,11 +57,10 @@ public class Human {
     }
 
     String describeAge(){
-        Date date = new java.util.Date(this.birthDate);
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-        LocalDate now = LocalDate.now();
-        return "Year: "+(now.getYear()-getYear())+"Month:"+(now.getYear()-getYear()+1)+"Day:"+(now.getYear()-getYear())*365;
+        LocalDate localBirth = Instant.ofEpochMilli(birthDate).atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate localDate = LocalDate.now();
+        Period age = Period.between(localBirth,localDate);
+        return age.getYears()+"years"+age.getMonths()+" months"+age.getDays()+"days";
     }
 
     @Override
@@ -72,9 +74,6 @@ public class Human {
         System.out.println("Object removed from memory!");
     }
 
-    public static void main(String[] args) {
-        System.gc();
-    }
 
     public String getName() {
         return this.name;

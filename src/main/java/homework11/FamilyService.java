@@ -55,7 +55,6 @@ public class FamilyService {
         return family;
     }
 
-
     public Family deleteAllChildrenOlderThan(int childAge){
         int dateOfBorn = LocalDate.now().getYear()-childAge;
         return db.getData().stream()
