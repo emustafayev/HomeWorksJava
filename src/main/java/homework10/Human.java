@@ -1,6 +1,5 @@
 package homework10;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -58,7 +57,6 @@ public class Human {
         Date date = new Date(millis);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/M/yyyy");
         return dateFormat.format(date);
-
     }
 
     String describeAge(){

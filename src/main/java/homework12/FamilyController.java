@@ -24,15 +24,16 @@ public class FamilyController {
             console.print(Menu.menuItem);
             int userChoice = Parser.getUserChoice(console);
             switch (userChoice){
-                case 1:familyService.displayAllFamilies();break;
-                case 2:getFamiliesBiggerThanController();break;
-                case 3:getFamiliesLessThanController();break;
-                case 4:console.print(countAccToMemberCountController());break;
-                case 5:createNewFamilyController();break;
-                case 6:deleteFamilyByIndexController();break;
-                case 7:editFamilyController.familyController(familyService);break;
-                case 8: removeChildren();break;
-                case 9:terminateApp();break;
+                case 1:fillWithTestData();break;
+                case 2:familyService.displayAllFamilies();break;
+                case 3:getFamiliesBiggerThanController();break;
+                case 4:getFamiliesLessThanController();break;
+                case 5:console.print(countAccToMemberCountController());break;
+                case 6:createNewFamilyController();break;
+                case 7:deleteFamilyByIndexController();break;
+                case 8:editFamilyController.familyController(familyService);break;
+                case 9: removeChildren();break;
+                case 10:terminateApp();break;
             }
         }
     }

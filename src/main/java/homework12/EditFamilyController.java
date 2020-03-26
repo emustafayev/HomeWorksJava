@@ -36,32 +36,36 @@ public class EditFamilyController {
         console.print("Enter index of family");
         int userChoice = Parser.getUserChoice(console);
         Family myFamily = familyService.getFamilyByIndex(userChoice);
-        if (myFamily.countFamily()<MAXFAMILYSIZE) {
-            console.print("Enter the childr's name:");
-            String childName = console.readLine();
+        if(myFamily==null){
+            console.print("There is no such family!");
+        }else {
+            if (myFamily.countFamily() < MAXFAMILYSIZE) {
+                console.print("Enter the childr's name:");
+                String childName = console.readLine();
 
-            console.print("Enter the child's last name:");
-            String childLastName = console.readLine();
-            console.print("Enter the child's birthday ex 30/03/1999");
-            String birthDay = console.readLine();
-            console.print("Enter the child's gender!");
-            String gender = console.readLine();
+                console.print("Enter the child's last name:");
+                String childLastName = console.readLine();
+                console.print("Enter the child's birthday ex 30/03/1999");
+                String birthDay = console.readLine();
+                console.print("Enter the child's gender!");
+                String gender = console.readLine();
 
 
-            String pattern = "dd/MM/yyyy";
-            Date date=null;
-            SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
-            try {
-                date = dateFormat.parse(birthDay);
-            } catch (ParseException e) {
-                console.print("Incorrect date format");
-            }
-            console.print("Enter iq:");
-            int iqF = Parser.getUserChoice(console);
-            Human child = new Human(childName,childLastName,iqF,date.getTime(),gender);
-            familyService.adoptChild(myFamily,child);
+                String pattern = "dd/MM/yyyy";
+                Date date = null;
+                SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+                try {
+                    date = dateFormat.parse(birthDay);
+                } catch (ParseException e) {
+                    console.print("Incorrect date format");
+                }
+                console.print("Enter iq:");
+                int iqF = Parser.getUserChoice(console);
+                Human child = new Human(childName, childLastName, iqF, date.getTime(), gender);
+                familyService.adoptChild(myFamily, child);
 
-        }else throw new FamilyOverflowException("Family members cant be more than 6");
+            } else throw new FamilyOverflowException("Family members cant be more than 6");
+        }
     }
 
 
@@ -71,19 +75,23 @@ public class EditFamilyController {
         console.print("Enter index of family");
         int userChoice = Parser.getUserChoice(console);
         Family myFamily = familyService.getFamilyByIndex(userChoice);
-            if (myFamily.countFamily()<MAXFAMILYSIZE){
-                String gender = new Random().nextInt(2)==1?MALE:FEMALE;
+        if(myFamily==null){
+            console.print("There is no such family!");
+        }else {
+            if (myFamily.countFamily() < MAXFAMILYSIZE) {
+                String gender = new Random().nextInt(2) == 1 ? MALE : FEMALE;
                 String name;
-                if(gender.equals(MALE)){
+                if (gender.equals(MALE)) {
                     console.print("Enter name for boy");
                     name = console.readLine();
-                }else {
+                } else {
                     console.print("Enter name for girl");
                     name = console.readLine();
                 }
 
-                familyService.bornChild(myFamily,gender,name);
-        }else throw new FamilyOverflowException("Family members cant be more than 6");
+                familyService.bornChild(myFamily, gender, name);
+            } else throw new FamilyOverflowException("Family members cant be more than 6");
+        }
     }
 
 }
