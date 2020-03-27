@@ -1,6 +1,7 @@
 package homework13;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -44,11 +45,14 @@ public class FamilyService {
         db.saveFamily(new Family(1,mother,father));
     }
 
-    public Family bornChild(Family family, String gender, String name)  {
+    public Family bornChild(Family family,String name, String gender)  {
         family.getChildren().add(new Human(
                 name,
                 family.getFather().surname,
-                (family.getFather().IQ_level+family.getMother().IQ_level)/2,LocalDate.now().getYear(),gender.equals("masculine")?"boy":"girl"));
+                (family.getFather().IQ_level+family.getMother().IQ_level)/2,
+                LocalDate.now().getYear()
+                ,gender.equals("masculine")?"boyy":"girl"));
+        db.saveFamily(family);
         return family;
     }
 
@@ -64,12 +68,16 @@ public class FamilyService {
 
     public boolean deleteAllChildrenOlderThan(int childAge){
         int dateOfBorn = LocalDate.now().getYear()-childAge;
-        return !(db.getData().stream()
-                .peek(family -> family.setChildren(family.getChildren()
-                        .stream()
-                        .filter(child ->
-                                child.getYear() > dateOfBorn)
-                        .collect(Collectors.toList()))).count() == 0);
+        List<Family> collect = db.getData().stream()
+                .peek(family -> {
+                    family.setChildren(family.getChildren()
+                            .stream()
+                            .filter(child ->
+                                    child.getYear() > dateOfBorn)
+                            .collect(Collectors.toList()));
+                }).collect(Collectors.toList());
+        db.setData(collect);
+        return true;
     }
 
     public boolean downloadData(){

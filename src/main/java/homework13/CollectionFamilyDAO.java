@@ -86,4 +86,7 @@ public class CollectionFamilyDAO implements FamilyDAO {
         return data.size();
     }
 
+    public void setData(List<Family> families){
+        this.data=families;
+    }
 }
