@@ -65,25 +65,28 @@ public class Family {
             }
         }
         this.children=newArr;
-        if(index<children.length-1){
+        if(index<newArr.length-1){
             removed=true;
         }
         return removed;
     }
 
-
-    private boolean remove(Human[] children, int index, Human[] result) {
-        try {
-            System.arraycopy(children, 0, result,0,index);
-            System.arraycopy(children, index+1,result,index,result.length-1);
-            this.children=result;
-            return true;
-        }catch (Exception e){
-            return false;
+    public boolean deleteChild(int index){
+        boolean removed=false;
+        Human[] newArr = new Human[this.children.length-1];
+        int i=0;
+        for (int j = 0; j < children.length; j++) {
+            if (j!=index){
+                newArr[i++] = children[j];
+            }
         }
+        this.children=newArr;
+        if(index<newArr.length-1){
+            removed=true;
+        }
+        return removed;
 
     }
-
 
     @Override
     public String toString(){

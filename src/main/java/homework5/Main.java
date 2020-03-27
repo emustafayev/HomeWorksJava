@@ -16,7 +16,7 @@ public class Main {
         Family family  = new Family(father,mother);
         family.addChildren(children);
         family.setPet(pet1);
-        family.deleteChild(child2);
+        family.deleteChild(0);
 
         System.out.println(family);
     }
