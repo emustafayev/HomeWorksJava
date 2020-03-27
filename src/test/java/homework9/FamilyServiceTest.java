@@ -1,5 +1,10 @@
 package homework9;
 
+import homework9.entity.Family;
+import homework9.entity.Human;
+import homework9.entity.Pet;
+import homework9.entity.Species;
+import homework9.service.FamilyService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +37,7 @@ class FamilyServiceTest {
         child2 = new Human("IronMan","Stark",1999,56);
         child3 = new Human("????","Stark",1971,87);
         child4 = new Human("AdoptChild","Ivanov",1995,78);
-        pet1 = new Pet("Petty",3,23,Species.DOG);
+        pet1 = new Pet("Petty",3,23, Species.DOG);
         pet2 = new Pet("Catty",4,34,Species.CAT);
         bornedChild = new Human("John","Stark",2020,39);
         testFamily = new Family(1,mother,father);

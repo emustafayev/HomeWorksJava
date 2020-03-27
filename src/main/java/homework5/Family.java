@@ -71,6 +71,7 @@ public class Family {
         return removed;
     }
 
+
     private boolean remove(Human[] children, int index, Human[] result) {
         try {
             System.arraycopy(children, 0, result,0,index);

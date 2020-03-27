@@ -1,6 +1,11 @@
 package homework9;
 
 
+import homework9.controller.FamilyController;
+import homework9.entity.Human;
+import homework9.entity.Pet;
+import homework9.entity.Species;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -14,7 +19,7 @@ public class Main {
         Human child3 = new Human("????","Stark",1971,87);
         Human child4 = new Human("AdoptChild","Ivanov",1995,78);
         Human[] children = new Human[]{child1,child2};
-        Pet pet1 = new Pet("Petty",3,23,Species.DOG);
+        Pet pet1 = new Pet("Petty",3,23, Species.DOG);
         Pet pet2 = new Pet("Catty",4,34,Species.CAT);
 
         familyController.familyService.createNewFamily(mother,father);

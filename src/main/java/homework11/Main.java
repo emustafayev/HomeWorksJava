@@ -1,6 +1,11 @@
 package homework11;
 
 
+import homework11.controller.FamilyController;
+import homework11.entity.Human;
+import homework11.entity.Pet;
+import homework11.entity.Species;
+
 public class Main {
 
     public static void main(String[] args) {

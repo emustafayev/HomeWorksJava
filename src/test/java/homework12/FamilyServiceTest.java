@@ -1,10 +1,10 @@
 package homework12;
 
-import homework9.Family;
-import homework9.FamilyService;
-import homework9.Human;
-import homework9.Pet;
-import homework9.Species;
+import homework9.entity.Family;
+import homework9.service.FamilyService;
+import homework9.entity.Human;
+import homework9.entity.Pet;
+import homework9.entity.Species;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
